@@ -53,12 +53,6 @@
         <field name="model">interview.candidate</field>
         <field name="arch" type="xml">
             <kanban>
-<!--                <field name="photo" widget="image"/>-->
-<!--                <field name="name"/>-->
-<!--                <field name="email"/>-->
-<!--                <field name="phone"/>-->
-<!--                <field name="degree"/>-->
-<!--                <field name="skills_ids"/>-->
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
@@ -82,5 +76,6 @@
         </field>
     </record>
 </odoo>
+
 
 
