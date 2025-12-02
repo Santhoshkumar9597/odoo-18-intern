@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_candidate" model="ir.actions.act_window">
+        <field name="name">Candidates</field>
+        <field name="res_model">interview.candidate</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Candidate record.
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_hr_root"
+              name="HR"
+              sequence="10"/>
+    <menuitem id="menu_interview_root"
+              name="Interview Process"
+              parent="menu_hr_root"
+              sequence="20"/>
+    <menuitem id="menu_candidate"
+              name="Candidates"
+              parent="menu_interview_root"
+              action="action_candidate"/>
+</odoo>
