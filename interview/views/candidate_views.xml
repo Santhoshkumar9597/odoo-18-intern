@@ -11,7 +11,8 @@
                     <button name="action_examine" type="object" string="Examination" class="btn-warning"/>
                     <button name="action_selected" type="object" string="Selected" class="btn-success"/>
                     <button name="action_rejected" type="object" string="Rejected" class="btn-danger"/>
-                    <field name="state" widget="statusbar" statusbar_visible="initial,qualification,exam,selected,rejected"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="initial,qualification,exam,selected,rejected"/>
                 </header>
                 <sheet>
                     <group>
@@ -44,7 +45,8 @@
                 <field name="phone"/>
                 <field name="degree"/>
                 <field name="skills_ids"/>
-                <field name="state"/>
+                <field name="state"
+                       decoration-success="state == 'selected'" widget="badge"/>
             </list>
         </field>
     </record>
@@ -57,7 +59,7 @@
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <field name="photo" widget="image"/>
-                             <br/>
+                            <br/>
                             <strong>
                                 <field name="name"/>
                             </strong>
@@ -69,13 +71,45 @@
                             <field name="degree"/>
                             <br/>
                             <field name="skills_ids"/>
+                            <strong>
+                            <field name="state"
+                            decoration-success="state == 'selected'"
+                            decoration-warning="state == 'rejected'"
+                            decoration-primary="state == 'qualification'"
+                            decoration-secondary="state == 'initial'"
+                            decoration-danger="state == 'exam'" widget="badge"/>
+                            </strong>
                         </div>
                     </t>
                 </templates>
             </kanban>
         </field>
     </record>
-</odoo>
+    <record id="view_candidate_search" model="ir.ui.view">
+        <field name="name">interview.candidate.search</field>
+        <field name="model">interview.candidate</field>
+        <field name="arch" type="xml">
+            <search string="Search Candidates">
 
+                <field name="name"/>
+                <field name="email"/>
+                <field name="skills_ids"/>
+
+                <filter string="Initial" name="state_initial" domain="[('state','=','initial')]"/>
+                <filter string="Qualified" name="state_qualification" domain="[('state','=','qualification')]"/>
+                <filter string="Examination" name="state_examination" domain="[('state','=','exam')]"/>
+                <filter string="Selected" name="state_selected" domain="[('state','=','selected')]"/>
+                <filter string="Rejected" name="state_rejected" domain="[('state','=','rejected')]"/>
+
+
+                <group expand="0" string="Group By">
+                    <filter string="State" name="group_state" context="{'group_by':'state'}"/>
+                    <filter string="Skills" name="group_skills" context="{'group_by':'skills_ids'}"/>
+                </group>
+
+            </search>
+        </field>
+    </record>
+</odoo>
 
 
